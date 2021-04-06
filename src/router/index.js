@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-
+import About from '../views/About.vue'
+import ProjectList from '../views/ProjectList.vue'
+import TeamList from '../views/TeamList.vue'
+import NotFound from '../views/errorpage/NotFound.vue'
 const routes = [
   {
     path: '/',
@@ -10,10 +13,25 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: About
+  },
+  {
+    path: '/teams',
+    name: 'Teams',
+    component: TeamList
+  },
+  {
+    path: '/projects',
+    name: 'Projects',
+    component: ProjectList
+  },
+  {
+    //list not found path at last prevent fall into this path instead of above specified paths
+    //any name allow after : (dynamic segment) .* is regex match any character combination
+    path: '/:catchNotMatchPath(.*)',
+    name: 'NotFound',
+    component: NotFound
+    // redirect: '/'
   }
 ]
 
